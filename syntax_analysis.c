@@ -6,6 +6,7 @@
 /* Variables */
 int charClass;
 char lexeme [100];
+char nline[100];
 char nextChar;
 int lexLen;
 int token;
@@ -52,10 +53,13 @@ int main(int argc, char ** argv) {
 		return 1;
 	}
 	else {
-		getChar();
-		do {
-			lex();
-		} while (nextToken != EOF);
+		while (fgets (nline, sizeof(nline), in_fp) != NULL){
+			getChar();
+			do {
+				lex();
+				expr();
+			} while (nextToken != EOF);
+		}
 		return 0;
 	}
 }
