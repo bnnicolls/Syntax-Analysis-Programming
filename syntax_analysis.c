@@ -16,7 +16,11 @@ FILE *in_fp, *fopen();
 void addChar();
 void getChar();
 void getNonBlank();
+void expr();
+void term();
+void factor();
 int lex();
+void error();
 
 /* Character classes */
 #define LETTER 0
@@ -46,6 +50,10 @@ main() {
 			lex();
 		} while (nextToken != EOF);
 	}
+}
+/*****************************************************/
+void error() {
+	printf( "Error '%s' on line %d ", error, lineCount);
 }
 /*****************************************************/
 /* lookup - a function to lookup operators and parentheses
@@ -154,7 +162,11 @@ int lex() {
 			lexeme[2] = 'F';
 			lexeme[3] = 0;
 			break;
-} /* End of switch */
+	} /* End of switch */
+	printf("Next token is: %d, Next lexeme is %s\n",
+	nextToken, lexeme);
+	return nextToken;
+} /* End of function lex */
 /*****************************************************/
 void expr() {
 printf("Enter <expr>\n");
@@ -194,11 +206,11 @@ void factor() {
 	else {
 		if (nextToken == LEFT_PAREN) {
 			lex();
-			expr();
+			expr();	
 			if (nextToken == RIGHT_PAREN)
 				lex();
 			else
-			error();
+				error();
 		} /* End of if (nextToken == ... */
 		/* It was not an id, an integer literal, or a left
 		parenthesis */
@@ -207,9 +219,4 @@ void factor() {
 	} /* End of else */
 	printf("Exit <factor>\n");;
 } /* End of function factor */	
-
-	
-printf("Next token is: %d, Next lexeme is %s\n",
-nextToken, lexeme);
-return nextToken;
-} /* End of function lex */
+/*****************************************************/
