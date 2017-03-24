@@ -41,10 +41,10 @@ void error();
 
 /******************************************************/
 /* main driver */
-main() {
+main(int argc, char ** argv) {
 /* Open the input data file and process its contents */
-	if ((in_fp = fopen("front.in", "r")) == NULL)
-		printf("ERROR - cannot open front.in \n");
+	if ((in_fp = fopen(argv[1], "r")) == NULL)
+		printf("ERROR - cannot open specified file \n");
 	else {
 		getChar();
 		do {
