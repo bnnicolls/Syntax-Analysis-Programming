@@ -63,6 +63,7 @@ int main(int argc, char ** argv) {
 				expr();
 			} while (nextToken != EOF);
 		}
+		fclose(in_fp);
 		return 0;
 	}
 }
@@ -134,7 +135,7 @@ void getChar() {
 /* getNonBlank - a function to call getChar until it
 returns a non-whitespace character */
 void getNonBlank() {
-	while (isspace(nextChar))
+	while (isspace(nextChar) && nextChar != '\n')
 		getChar();
 }
 /*****************************************************/
