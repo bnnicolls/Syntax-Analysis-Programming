@@ -155,7 +155,60 @@ int lex() {
 			lexeme[3] = 0;
 			break;
 } /* End of switch */
-			
+/*****************************************************/
+void expr() {
+printf("Enter <expr>\n");
+	/* Parse the first term */
+	term();
+	/* As long as the next token is + or -, get
+	the next token and parse the next term */
+	while (nextToken == ADD_OP || nextToken == SUB_OP) {
+		lex();
+		term();
+	}
+	printf("Exit <expr>\n");
+} /* End of function expr */	
+/*****************************************************/
+void term() {
+printf("Enter <term>\n");
+	/* Parse the first factor */
+	factor();
+	/* As long as the next token is * or /, get the
+	next token and parse the next factor */
+	while (nextToken == MULT_OP || nextToken == DIV_OP) {
+		lex();
+		factor();
+	}
+	printf("Exit <term>\n");
+} /* End of function term */
+/*****************************************************/
+void factor() {
+	printf("Enter <factor>\n");
+	/* Determine which RHS */
+	if (nextToken == IDENT || nextToken == INT_LIT)
+		/* Get the next token */
+		lex();
+	/* If the RHS is ( <expr>), call lex to pass over the
+	left parenthesis, call expr, and check for the right
+	parenthesis */
+	else {
+		if (nextToken == LEFT_PAREN) {
+			lex();
+			expr();
+			if (nextToken == RIGHT_PAREN)
+				lex();
+			else
+			error();
+		} /* End of if (nextToken == ... */
+		/* It was not an id, an integer literal, or a left
+		parenthesis */
+		else
+			error();
+	} /* End of else */
+	printf("Exit <factor>\n");;
+} /* End of function factor */	
+
+	
 printf("Next token is: %d, Next lexeme is %s\n",
 nextToken, lexeme);
 return nextToken;
