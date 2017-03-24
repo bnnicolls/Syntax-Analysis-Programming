@@ -41,15 +41,22 @@ void error();
 
 /******************************************************/
 /* main driver */
-main(int argc, char ** argv) {
+int main(int argc, char ** argv) {
 /* Open the input data file and process its contents */
-	if ((in_fp = fopen(argv[1], "r")) == NULL)
+	if(argc < 2){
+		printf("Not enough arguments!");
+		return 1;
+	}
+	if ((in_fp = fopen(argv[1], "r")) == NULL){
 		printf("ERROR - cannot open specified file \n");
+		return 1;
+	}
 	else {
 		getChar();
 		do {
 			lex();
 		} while (nextToken != EOF);
+		return 0;
 	}
 }
 /*****************************************************/
