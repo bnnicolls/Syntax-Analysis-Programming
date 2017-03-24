@@ -10,6 +10,7 @@ char nextChar;
 int lexLen;
 int token;
 int nextToken;
+int lines;
 FILE *in_fp, *fopen();
 
 /* Function declarations */
@@ -53,7 +54,7 @@ main() {
 }
 /*****************************************************/
 void error() {
-	printf( "Error '%s' on line %d ", error, lineCount);
+	printf( "Error on line %d ", lines);
 }
 /*****************************************************/
 /* lookup - a function to lookup operators and parentheses
