@@ -45,7 +45,7 @@ void error();
 int main(int argc, char ** argv) {
 /* Open the input data file and process its contents */
 	if(argc < 2){
-		printf("Not enough arguments!");
+		printf("Not enough arguments! \n");
 		return 1;
 	}
 	if ((in_fp = fopen(argv[1], "r")) == NULL){
@@ -53,7 +53,9 @@ int main(int argc, char ** argv) {
 		return 1;
 	}
 	else {
+		lines = 0;
 		while (fgets (nline, sizeof(nline), in_fp) != NULL){
+			lines++;
 			getChar();
 			do {
 				lex();
